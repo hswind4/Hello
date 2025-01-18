@@ -1,0 +1,21 @@
+name: Trigger on Push and Schedule
+
+on:
+  # 监听 push 事件
+  push:
+    branches:
+      - main  # 只在 main 分支推送时触发
+  # 定时任务，每 5 分钟触发一次
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  multi-trigger-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Run your script
+        run: echo "Triggered by push or schedule!"
