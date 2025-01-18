@@ -1,0 +1,22 @@
+name: Print Directory Contents
+on:
+  schedule:
+    - cron: "*/5 * * * *"  # 每5分钟运行一次
+
+jobs:
+  list-directory:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        
+      - name: List directory contents
+        run: |
+          echo "Current time: $(date)"
+          echo "Directory contents:"
+          ls -la
+          
+      - name: List entire repository structure
+        run: |
+          echo "Complete repository structure:"
+          tree || (apt-get update && apt-get install tree -y && tree)
